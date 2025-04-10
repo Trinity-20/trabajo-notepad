@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Nota</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Nota</h1>
+
+        <!-- Formulario de edición -->
+        <form action="/notas/{{ nota.id }}/editar" method="POST">
+            <label for="titulo">Título:</label>
+            <input type="text" name="titulo" value="{{ nota.titulo }}" required><br>
+            
+            <label for="contenido">Contenido:</label>
+            <textarea name="contenido" required>{{ nota.contenido }}</textarea><br>
+            
+            <label for="categoria_id">Categoría:</label>
+            <select name="categoria_id" required>
+                <option value="" disabled>Seleccione una categoría</option>
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}" {% if categoria.id == nota.categoria_id %} selected {% endif %}>{{ categoria.nombre }}</option>
+                {% endfor %}
+            </select><br>
+            
+            <input type="submit" value="Actualizar Nota" class="submit-btn">
+        </form>
+
+        <a href="/" class="cancel-btn">Cancelar</a>
+    </div>
+</body>
+</html>

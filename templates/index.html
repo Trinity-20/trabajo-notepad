@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block de Notas</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido al Block de Notas</h1>
+
+        <!-- Formulario de notas -->
+        <form action="/notas/" method="POST" class="form">
+            <label for="titulo">Título:</label>
+            <input type="text" name="titulo" required><br>
+            
+            <label for="contenido">Contenido:</label>
+            <textarea name="contenido" required></textarea><br>
+            
+            <label for="categoria_id">Categoría:</label>
+            <select name="categoria_id" required>
+                <!-- Aquí se cargan las categorías disponibles desde la base de datos -->
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                {% endfor %}
+            </select><br>
+
+            <label for="usuario_id">Usuario:</label>
+            <select name="usuario_id" required>
+                <!-- Aquí se cargan los usuarios disponibles desde la base de datos -->
+                {% for usuario in usuarios %}
+                    <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
+                {% endfor %}
+            </select><br>
+            
+            <input type="submit" value="Crear Nota" class="submit-btn">
+        </form>
+
+        <!-- Listado de notas -->
+        <h2>Notas</h2>
+        <ul class="notes-list">
+            {% for nota in notas %}
+            <li class="note-item">
+                <h3>{{ nota.titulo }}</h3>
+                <p>{{ nota.contenido }}</p>
+                <p><strong>Categoría:</strong> {{ nota.categoria.nombre }}</p> <!-- Mostrar categoría -->
+                <p><strong>Creado por:</strong> {{ nota.propietario.nombre }}</p> <!-- Mostrar el nombre del usuario que creó la nota -->
+
+                <!-- Botón de eliminar -->
+                <form action="/notas/{{ nota.id }}" method="POST" style="display:inline;">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="delete-btn">Eliminar</button>
+                </form>
+
+                <!-- Botón de editar -->
+                <a href="/notas/{{ nota.id }}/editar" class="edit-btn">Editar</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
