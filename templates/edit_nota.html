@@ -25,6 +25,14 @@
                     <option value="{{ categoria.id }}" {% if categoria.id == nota.categoria_id %} selected {% endif %}>{{ categoria.nombre }}</option>
                 {% endfor %}
             </select><br>
+
+            <label for="usuario_id">Usuario:</label>
+            <select name="usuario_id" required>
+                <option value="" disabled>Seleccione un usuario</option>
+                {% for usuario in usuarios %}
+                    <option value="{{ usuario.id }}" {% if usuario.id == nota.usuario_id %} selected {% endif %}>{{ usuario.nombre }}</option>
+                {% endfor %}
+            </select><br>
             
             <input type="submit" value="Actualizar Nota" class="submit-btn">
         </form>
