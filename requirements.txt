@@ -1,5 +1,5 @@
 fastapi==0.95.2
 uvicorn==0.18.2
-sqlalchemy==1.4.27   # O la versión más estable según lo necesites
-mysql-connector-python==8.0.28  # O la versión adecuada de este con SQLAlchemy
-jinja2==3.0.3
+sqlalchemy==1.4.27   
+mysql-connector-python==8.0.28  
+jinja2==3.0.3 #crea plantollas acorde con python

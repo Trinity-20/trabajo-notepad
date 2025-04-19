@@ -18,13 +18,8 @@
             <label for="contenido">Contenido:</label>
             <textarea name="contenido" required>{{ nota.contenido }}</textarea><br>
             
-            <label for="categoria_id">Categoría:</label>
-            <select name="categoria_id" required>
-                <option value="" disabled>Seleccione una categoría</option>
-                {% for categoria in categorias %}
-                    <option value="{{ categoria.id }}" {% if categoria.id == nota.categoria_id %} selected {% endif %}>{{ categoria.nombre }}</option>
-                {% endfor %}
-            </select><br>
+            <label for="categoria">Categoría:</label>
+            <input type="text" name="categoria" value="{{ nota.categoria.nombre }}" required><br>
 
             <label for="usuario_id">Usuario:</label>
             <select name="usuario_id" required>

@@ -18,13 +18,8 @@
             <label for="contenido">Contenido:</label>
             <textarea name="contenido" required></textarea><br>
             
-            <label for="categoria_id">Categoría:</label>
-            <select name="categoria_id" required>
-                <!-- Aquí se cargan las categorías disponibles desde la base de datos -->
-                {% for categoria in categorias %}
-                    <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
-                {% endfor %}
-            </select><br>
+            <label for="categoria">Categoría:</label>
+            <input type="text" name="categoria" required><br>
 
             <label for="usuario_id">Usuario:</label>
             <select name="usuario_id" required>
@@ -44,8 +39,8 @@
             <li class="note-item">
                 <h3>{{ nota.titulo }}</h3>
                 <p>{{ nota.contenido }}</p>
-                <p><strong>Categoría:</strong> {{ nota.categoria.nombre }}</p> <!-- Mostrar categoría -->
-                <p><strong>Creado por:</strong> {{ nota.propietario.nombre }}</p> <!-- Mostrar el nombre del usuario que creó la nota -->
+                <p><strong>Categoría:</strong> {{ nota.categoria.nombre }}</p>
+                <p><strong>Creado por:</strong> {{ nota.propietario.nombre }}</p>
 
                 <!-- Botón de eliminar -->
                 <form action="/notas/{{ nota.id }}" method="POST" style="display:inline;">
