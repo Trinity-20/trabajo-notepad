@@ -1,18 +1,39 @@
 from pydantic import BaseModel
 from typing import Optional
 
+
+class CategoriaSchema(BaseModel):
+    id: int
+    nombre: str
+
+    class Config:
+        orm_mode = True
+
+
+class UsuarioSchema(BaseModel):
+    id: int
+    nombre: str
+    email: str
+
+    class Config:
+        orm_mode = True
+
+
+
 class NotaBase(BaseModel):
     titulo: str
     contenido: str
 
-class NotaCreate(BaseModel):
-    titulo: str
-    contenido: str
-    categoria_id: Optional[int] = None  # Asegúrate de agregar este campo
+class NotaCreate(NotaBase):
+    categoria_id: Optional[int] = None
+    usuario_id: int
 
-class Nota(NotaBase):
+class NotaSchema(NotaBase):
     id: int
+    categoria_id: int
     usuario_id: int
 
     class Config:
         orm_mode = True
+
+

@@ -7,6 +7,7 @@ from . import crud
 from . import schemas
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from typing import List
 
 # Crear tablas en la base de datos
 models.Base.metadata.create_all(bind=engine)
@@ -111,3 +112,23 @@ async def update_nota(
     db.refresh(nota)
 
     return RedirectResponse(url="/", status_code=303)
+
+
+# Endpoints API (JSON) CRUD
+
+
+# Ver todas las categorías
+@app.get("/categorias", response_model=List[schemas.CategoriaSchema])
+def get_categorias(db: Session = Depends(get_db)):
+    return db.query(models.Categoria).all()
+
+# Ver todos los usuarios
+@app.get("/usuarios", response_model=List[schemas.UsuarioSchema])
+def get_usuarios(db: Session = Depends(get_db)):
+    return db.query(models.Usuario).all()
+
+# Ver todas las notas
+@app.get("/notas", response_model=List[schemas.NotaSchema])
+def get_notas(db: Session = Depends(get_db)):
+    return db.query(models.Nota).all()
+
